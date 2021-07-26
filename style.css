@@ -1,3 +1,4 @@
+
 * {
   padding: 0;
   margin: 0;
@@ -24,8 +25,6 @@ body {
 
 #nav li button {
   padding: 1rem 2rem 1rem 2rem;
-  background-color: pink;
-  color: black;
 }
 
 #middle {
@@ -40,4 +39,29 @@ body {
 
 #letter {
   font-size: 5rem;
+}
+
+.button{
+  display: inline-block;
+  background: pink;
+  border: none;
+  outline: none;
+  color: black;
+  border-radius: 3px;
+  box-shadow: 0 5px 0px darken(pink,0%);
+  border-bottom: 2px solid darken(pink,3%);
+
+}
+  
+.button:hover{
+    background: darken(pink,5%);
+    box-shadow: 0 4px 1px darken(pink,5%);
+    border-bottom: 2px solid darken(pink,8%);
+    transition: all 0.1s ease-in;
+}
+  
+.button:active{
+    transform:translateY(0.75rem);
+    border-bottom-width: 2px;
+    box-shadow: none;
 }
