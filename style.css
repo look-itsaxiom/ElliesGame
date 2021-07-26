@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 22% 56% 22%;
+}
+
+.side-bar {
+  background: pink;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+#nav {
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+#nav li button {
+  padding: 1rem 2rem 1rem 2rem;
+  background-color: pink;
+  color: black;
+}
+
+#middle {
+  height: 100vh;
+  background: black;
+  color: pink;
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr 2fr;
+  justify-items: center;
+  align-items: center;
+}
+
+#letter {
+  font-size: 5rem;
+}
