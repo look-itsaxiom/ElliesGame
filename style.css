@@ -61,7 +61,7 @@ body {
 }
   
 .button:active{
-    transform:translateY(0.75rem);
-    border-bottom-width: 2px;
+    transform:translateY(0.5rem);
+    border-bottom-width: 1rem;
     box-shadow: none;
 }
