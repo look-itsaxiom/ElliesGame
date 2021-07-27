@@ -37,6 +37,14 @@ pageArea.addEventListener("keydown", function (event) {
     if (counter >= activeMode.length) {
       counter = 0;
     }
+    letter.classList.add("animate__animated" ,"animate__backInDown");
     letter.innerHTML = activeMode[counter].toUpperCase();
+    letter.addEventListener('animationend', () => {
+      letter.classList.remove("animate__animated" ,"animate__backInDown");
+    });
+    
+    
+    
+    
   }
 }, true);
