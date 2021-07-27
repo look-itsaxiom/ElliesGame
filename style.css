@@ -65,3 +65,9 @@ body {
     border-bottom-width: 1rem;
     box-shadow: none;
 }
+
+.button-pressed {
+    transform:translateY(0.75rem);
+    border-bottom-width: 2px;
+    box-shadow: none;
+}
