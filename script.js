@@ -13,10 +13,11 @@ let pageArea = document.getElementById("body");
 let abcBtn = document.getElementById("abcBtn");
 let oneTwoThreeBtn = document.getElementById("123Btn");
 let letter = document.getElementById("letter");
+let hiddenText = document.getElementById("focuser");
 //set h1 to value of activeMode
 letter.innerHTML = activeMode[counter].toUpperCase();
 
-
+hiddenText.click();
 pageArea.focus();
 
 abcBtn.addEventListener("click", function() {
