@@ -20,12 +20,16 @@ letter.innerHTML = activeMode[counter].toUpperCase();
 pageArea.focus();
 
 abcBtn.addEventListener("click", function() {
+  abcBtn.classList.add("button-pressed");
+  oneTwoThreeBtn.classList.remove("button-pressed");
   activeMode = abc;
   counter = 0;
   letter.innerHTML = activeMode[counter].toUpperCase();
 })
 
 oneTwoThreeBtn.addEventListener("click", function() {
+  oneTwoThreeBtn.classList.add("button-pressed");
+  abcBtn.classList.remove("button-pressed");
   activeMode = oneTwoThree;
   counter = 0;
   letter.innerHTML = activeMode[counter].toUpperCase();
