@@ -65,17 +65,22 @@ countBtn.addEventListener("click", function() {
 })
 
 pageArea.addEventListener("keydown", function (event) {
-  if (event.key === letter.innerHTML.toLowerCase()) {
-    counter += 1;
+  if (letter.innerHTML.toLowerCase().split("").some(char => char === event.key)) {
+    console.log(typeof event.key);
+    letter.innerHTML = letter.innerHTML.toLowerCase().replace(event.key, "");
+    console.log(letter.innerHTML);
     if (counter >= activeMode.length) {
       counter = 0;
     }
 
-    letter.classList.add("animate__animated" ,"animate__backInDown");
-    letter.innerHTML = String(activeMode[counter]).toUpperCase();
-    letter.addEventListener('animationend', () => {
-      letter.classList.remove("animate__animated" ,"animate__backInDown");
-    });
+    if (letter.innerHTML === "") {
+      letter.classList.add("animate__animated" ,"animate__backInDown");
+      counter += 1;
+      letter.innerHTML = String(activeMode[counter]).toUpperCase();
+      letter.addEventListener('animationend', () => {
+        letter.classList.remove("animate__animated" ,"animate__backInDown");
+      });
+  }
     
     
     
