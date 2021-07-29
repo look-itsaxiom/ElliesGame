@@ -1,8 +1,8 @@
 //source values for modes
 const abc = ["a","b","c","d","e","f","g","h","i","j","k", "l", "m","n","o", "p","q","r","s","t","u","v","w","x","y","z"];
 const oneTwoThree = ['1', '2', '3', '4', '5', '6', '7','8', '9', '0'];
-const nameArr = ['E', 'L', 'L', 'I', 'E'];
-let countingArr = [...Array(100).keys()];
+const nameArr = ['ELLIE', 'SKIBENESS'];
+let countingArr = [...Array(1001).keys()];
 
 //set active mode as abc as default
 let activeMode = abc;
@@ -65,17 +65,15 @@ countBtn.addEventListener("click", function() {
 })
 
 pageArea.addEventListener("keydown", function (event) {
-  if (letter.innerHTML.toLowerCase().split("").some(char => char === event.key)) {
-    console.log(typeof event.key);
+  if (event.key === letter.innerHTML.toLowerCase().split("")[0]) {
     letter.innerHTML = letter.innerHTML.toLowerCase().replace(event.key, "");
-    console.log(letter.innerHTML);
-    if (counter >= activeMode.length) {
-      counter = 0;
-    }
 
     if (letter.innerHTML === "") {
       letter.classList.add("animate__animated" ,"animate__backInDown");
       counter += 1;
+      if (counter >= activeMode.length) {
+        counter = 0;
+      }
       letter.innerHTML = String(activeMode[counter]).toUpperCase();
       letter.addEventListener('animationend', () => {
         letter.classList.remove("animate__animated" ,"animate__backInDown");
