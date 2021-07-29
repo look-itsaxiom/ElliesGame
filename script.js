@@ -66,7 +66,7 @@ countBtn.addEventListener("click", function() {
 
 pageArea.addEventListener("keydown", function (event) {
   if (event.key === letter.innerHTML.toLowerCase().split("")[0]) {
-    letter.innerHTML = letter.innerHTML.toLowerCase().replace(event.key, "");
+    letter.innerHTML = letter.innerHTML.toLowerCase().replace(event.key, "").toUpperCase();
 
     if (letter.innerHTML === "") {
       letter.classList.add("animate__animated" ,"animate__backInDown");
