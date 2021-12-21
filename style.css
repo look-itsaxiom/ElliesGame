@@ -82,5 +82,7 @@ body {
 }
 
 #matchBoard img {
-  max-width: 70%;
+  height: 20vh;
+  width: 15vw;
+  max-width: 60%;;
 }
