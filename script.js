@@ -3,6 +3,7 @@ const abc = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 const oneTwoThree = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 const nameArr = ['ELLIE', 'SKIBENESS'];
 let countingArr = [...Array(1001).keys()];
+const dinosArr = ["TRex", "Velociraptor", "Stegosaurus", "Triceratops"];
 
 //set active mode as abc as default
 let activeMode = "";
@@ -75,6 +76,7 @@ dinoMatchBtn.addEventListener("click", function () {
   title.innerHTML = "Let's match Dinosaurs, Ellie!"
   activeMode = "dinoMatch";
   letter.innerHTML = "";
+
 })
 
 pageArea.addEventListener("keydown", function (event) {
@@ -98,3 +100,28 @@ pageArea.addEventListener("keydown", function (event) {
 
   }
 }, true);
+
+function generateMatchBoardState(matchArr) {
+  let boardState = Array(matchArr.length * 2);
+  let correctState;
+
+  do {
+    correctState = true;
+
+    for (let i = 0; i < boardState.length; i++) {
+      boardState[i] = matchArr[Math.floor(Math.random() * matchArr.length)];
+    }
+
+
+    matchArr.forEach(necessaryCard => {
+      let cardCount = boardState.filter(proposedCard => proposedCard === necessaryCard);
+      console.log(`${necessaryCard} : ${cardCount.length}`);
+      if (cardCount.length > 2 || cardCount.length < 2) {
+        correctState = false;
+      }
+      console.log(correctState);
+    });
+  } while ((!correctState))
+
+  return boardState;
+}
