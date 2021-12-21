@@ -26,6 +26,7 @@ let hiddenText = document.getElementById("focuser");
 abcBtn.addEventListener("click", function () {
   abcBtn.classList.add("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
+  dinoMatchBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
   title.innerHTML = "Let's sing our ABCs, Ellie!";
@@ -37,6 +38,7 @@ abcBtn.addEventListener("click", function () {
 oneTwoThreeBtn.addEventListener("click", function () {
   oneTwoThreeBtn.classList.add("button-pressed");
   abcBtn.classList.remove("button-pressed");
+  dinoMatchBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
   title.innerHTML = "Let's count to 9, Ellie!";
@@ -48,6 +50,7 @@ oneTwoThreeBtn.addEventListener("click", function () {
 nameBtn.addEventListener("click", function () {
   nameBtn.classList.add("button-pressed");
   abcBtn.classList.remove("button-pressed");
+  dinoMatchBtn.classList.remove("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
   title.innerHTML = "Let's spell your name, Ellie!";
@@ -58,6 +61,7 @@ nameBtn.addEventListener("click", function () {
 
 countBtn.addEventListener("click", function () {
   countBtn.classList.add("button-pressed");
+  dinoMatchBtn.classList.remove("button-pressed");
   abcBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
@@ -76,7 +80,7 @@ dinoMatchBtn.addEventListener("click", function () {
   title.innerHTML = "Let's match Dinosaurs, Ellie!"
   activeMode = "dinoMatch";
   letter.innerHTML = "";
-
+  renderMatchBoard(generateMatchBoardState(dinosArr));
 })
 
 pageArea.addEventListener("keydown", function (event) {
@@ -101,6 +105,20 @@ pageArea.addEventListener("keydown", function (event) {
   }
 }, true);
 
+function renderMatchBoard(boardState) {
+  let board = document.createElement('div');
+  board.id = "matchBoard"
+  boardState.forEach(card => {
+    let img = document.createElement('img');
+    img.src = "img/cardback.jpg";
+    //img.width = "100";
+    //img.height = "100";
+    board.appendChild(img);
+  })
+
+  letter.parentNode.replaceChild(board, letter);
+}
+
 function generateMatchBoardState(matchArr) {
   let boardState = Array(matchArr.length * 2);
   let correctState;
@@ -115,11 +133,9 @@ function generateMatchBoardState(matchArr) {
 
     matchArr.forEach(necessaryCard => {
       let cardCount = boardState.filter(proposedCard => proposedCard === necessaryCard);
-      console.log(`${necessaryCard} : ${cardCount.length}`);
       if (cardCount.length > 2 || cardCount.length < 2) {
         correctState = false;
       }
-      console.log(correctState);
     });
   } while ((!correctState))
 
