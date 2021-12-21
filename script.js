@@ -124,6 +124,15 @@ function renderMatchBoard(boardState) {
   board.id = "matchBoard"
   boardState.forEach(card => {
     let img = document.createElement('img');
+    img.alt = card
+    img.addEventListener("click" , function (event) {
+      this.classList.add("animate__flipOutY");
+      this.addEventListener('animationend', () => {
+        this.classList.remove("animate__flipOutY");
+        this.classList.add("animate__flipInY");
+        this.src = `img/${this.alt}.jpg`;
+      })
+    })
     img.src = "img/cardback.jpg";
     //img.width = "100";
     //img.height = "100";
