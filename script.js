@@ -29,6 +29,7 @@ abcBtn.addEventListener("click", function () {
   dinoMatchBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
+  removeMatchBoard();
   title.innerHTML = "Let's sing our ABCs, Ellie!";
   activeMode = abc;
   counter = 0;
@@ -41,6 +42,7 @@ oneTwoThreeBtn.addEventListener("click", function () {
   dinoMatchBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
+  removeMatchBoard();
   title.innerHTML = "Let's count to 9, Ellie!";
   activeMode = oneTwoThree;
   counter = 0;
@@ -53,6 +55,7 @@ nameBtn.addEventListener("click", function () {
   dinoMatchBtn.classList.remove("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
+  removeMatchBoard();
   title.innerHTML = "Let's spell your name, Ellie!";
   activeMode = nameArr;
   counter = 0;
@@ -65,6 +68,7 @@ countBtn.addEventListener("click", function () {
   abcBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
+  removeMatchBoard();
   title.innerHTML = "Let's count, Ellie!";
   activeMode = countingArr;
   counter = 0;
@@ -105,7 +109,17 @@ pageArea.addEventListener("keydown", function (event) {
   }
 }, true);
 
+function removeMatchBoard() {
+  if (document.getElementById("matchBoard")) {
+    board = document.getElementById("matchBoard");
+
+    board.parentNode.replaceChild(letter, board);
+    board.remove();
+  }
+}
+
 function renderMatchBoard(boardState) {
+  let target = document.getElementById("letter");
   let board = document.createElement('div');
   board.id = "matchBoard"
   boardState.forEach(card => {
@@ -116,7 +130,7 @@ function renderMatchBoard(boardState) {
     board.appendChild(img);
   })
 
-  letter.parentNode.replaceChild(board, letter);
+  letter.parentNode.replaceChild(board, target);
 }
 
 function generateMatchBoardState(matchArr) {
