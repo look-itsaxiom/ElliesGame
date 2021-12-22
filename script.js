@@ -4,6 +4,7 @@ const oneTwoThree = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 const nameArr = ['ELLIE', 'SKIBENESS'];
 let countingArr = [...Array(1001).keys()];
 const dinosArr = ["TRex", "Velociraptor", "Stegosaurus", "Triceratops"];
+let boardState = [];
 
 //set active mode as abc as default
 let activeMode = "";
@@ -84,7 +85,9 @@ dinoMatchBtn.addEventListener("click", function () {
   title.innerHTML = "Let's match Dinosaurs, Ellie!"
   activeMode = "dinoMatch";
   letter.innerHTML = "";
-  renderMatchBoard(generateMatchBoardState(dinosArr));
+  boardState = generateMatchBoardState(dinosArr);
+  counter = 0;
+  renderMatchBoard(boardState, letter);
 })
 
 pageArea.addEventListener("keydown", function (event) {
@@ -102,12 +105,49 @@ pageArea.addEventListener("keydown", function (event) {
         letter.classList.remove("animate__animated", "animate__backInDown");
       });
     }
-
-
-
-
   }
 }, true);
+
+function updateBoardState() {
+  let boardObj = document.getElementById("matchBoard");
+  let boardStateRaw = boardObj.childNodes;
+  for (let i = 0; i < boardStateRaw.length; i++) {
+    boardState[i].id = boardStateRaw[i].id;
+    boardState[i].name = boardStateRaw[i].alt;
+    boardState[i].flipped = boardStateRaw[i].classList[0];
+  }
+
+  if (counter >= 2) {
+    let flippedCards = boardState.filter(card => card.flipped === "flipped")
+    if (flippedCards[0].name === flippedCards[1].name) {
+      boardState[flippedCards[0].id].flipped = "matched";
+      boardState[flippedCards[1].id].flipped = "matched";
+      boardObj.childNodes[flippedCards[0].id].classList.remove("flipped");
+      boardObj.childNodes[flippedCards[1].id].classList.remove("flipped");
+      boardObj.childNodes[flippedCards[0].id].classList.add("matched");
+      boardObj.childNodes[flippedCards[1].id].classList.add("matched");
+    } else {
+      boardState[flippedCards[0].id].flipped = "unflipped";
+      boardState[flippedCards[1].id].flipped = "unflipped";
+      boardObj.childNodes[flippedCards[0].id].classList.remove("flipped");
+      boardObj.childNodes[flippedCards[1].id].classList.remove("flipped");
+      boardObj.childNodes[flippedCards[0].id].classList.add("unflipped");
+      boardObj.childNodes[flippedCards[1].id].classList.add("unflipped");
+      setTimeout(() => {
+        boardObj.childNodes[flippedCards[0].id].src = "img/cardback.jpg";
+        boardObj.childNodes[flippedCards[1].id].src = "img/cardback.jpg";
+      }, 1500);
+    }
+    counter = 0;
+  }
+
+  if (boardState.filter(card => card.flipped === "matched").length === boardState.length) {
+    boardObj.classList.add("animate__fadeOutTopRight");
+    setTimeout(() => removeMatchBoard(), 3000);
+    letter.innerHTML = "YOU WIN!";
+  }
+  
+}
 
 function removeMatchBoard() {
   if (document.getElementById("matchBoard")) {
@@ -118,28 +158,36 @@ function removeMatchBoard() {
   }
 }
 
-function renderMatchBoard(boardState) {
-  let target = document.getElementById("letter");
+function renderMatchBoard(boardState, target) {
+  //let target = document.getElementById("letter");
   let board = document.createElement('div');
   board.id = "matchBoard"
   boardState.forEach(card => {
     let img = document.createElement('img');
-    img.alt = card
+    img.alt = card.name
+    img.className = "unflipped";
+    img.id = card.id;
     img.addEventListener("click" , function (event) {
+      this.classList.remove("unflipped");
+      this.classList.add("flipped");
       this.classList.add("animate__flipOutY");
-      this.addEventListener('animationend', () => {
-        this.classList.remove("animate__flipOutY");
-        this.classList.add("animate__flipInY");
+      setTimeout(() => {
         this.src = `img/${this.alt}.jpg`;
+        counter++;
+        updateBoardState();
+      });
+      this.addEventListener('animationend', () => {
+        this.classList.remove("animate__flipOutY", "animate__flipInY");
       })
+      
     })
     img.src = "img/cardback.jpg";
-    //img.width = "100";
-    //img.height = "100";
+
     board.appendChild(img);
+    
   })
 
-  letter.parentNode.replaceChild(board, target);
+  target.parentNode.replaceChild(board, target);
 }
 
 function generateMatchBoardState(matchArr) {
@@ -150,12 +198,16 @@ function generateMatchBoardState(matchArr) {
     correctState = true;
 
     for (let i = 0; i < boardState.length; i++) {
-      boardState[i] = matchArr[Math.floor(Math.random() * matchArr.length)];
+      boardState[i] = {
+        id: i,
+        name: matchArr[Math.floor(Math.random() * matchArr.length)],
+        flipped: "unflipped",
+      }
     }
 
 
     matchArr.forEach(necessaryCard => {
-      let cardCount = boardState.filter(proposedCard => proposedCard === necessaryCard);
+      let cardCount = boardState.filter(proposedCard => proposedCard.name === necessaryCard);
       if (cardCount.length > 2 || cardCount.length < 2) {
         correctState = false;
       }
