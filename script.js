@@ -3,7 +3,7 @@ const abc = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 const oneTwoThree = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 const nameArr = ['ELLIE', 'SKIBENESS'];
 let countingArr = [...Array(1001).keys()];
-const dinosArr = ["TRex", "Velociraptor", "Stegosaurus", "Triceratops"];
+const dinosArr = ["TRex", "Velociraptor", "Stegosaurus", "Triceratops", "Allosaurus","Ankylosaurus", "Dilophosaurus","Pteranodon"];
 let boardState = [];
 
 //set active mode as abc as default
