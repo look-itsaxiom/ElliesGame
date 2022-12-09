@@ -19,9 +19,11 @@ let oneTwoThreeBtn = document.getElementById("123Btn");
 let countBtn = document.getElementById("countBtn");
 let nameBtn = document.getElementById("nameBtn");
 let dinoMatchBtn = document.getElementById("dinoMatchBtn");
+let dinoRaceBtn = document.getElementById("dinoRaceBtn");
 let letter = document.getElementById("letter");
 let title = document.getElementById("title");
 let hiddenText = document.getElementById("focuser");
+let dinoRacer = document.getElementById("dinoRace");
 
 
 abcBtn.addEventListener("click", function () {
@@ -30,6 +32,8 @@ abcBtn.addEventListener("click", function () {
   dinoMatchBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
+  dinoRaceBtn.classList.remove("button-pressed");
+  dinoRacer.classList.add("dinoRaceHidden");
   removeMatchBoard();
   title.innerHTML = "Let's sing our ABCs, Ellie!";
   activeMode = abc;
@@ -43,6 +47,9 @@ oneTwoThreeBtn.addEventListener("click", function () {
   dinoMatchBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
+  dinoRaceBtn.classList.remove("button-pressed");
+  dinoRaceBtn.classList.remove("button-pressed");
+  dinoRacer.classList.add("dinoRaceHidden");
   removeMatchBoard();
   title.innerHTML = "Let's count to 9, Ellie!";
   activeMode = oneTwoThree;
@@ -56,6 +63,8 @@ nameBtn.addEventListener("click", function () {
   dinoMatchBtn.classList.remove("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
   countBtn.classList.remove("button-pressed");
+  dinoRaceBtn.classList.remove("button-pressed");
+  dinoRacer.classList.add("dinoRaceHidden");
   removeMatchBoard();
   title.innerHTML = "Let's spell your name, Ellie!";
   activeMode = nameArr;
@@ -69,6 +78,8 @@ countBtn.addEventListener("click", function () {
   abcBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
+  dinoRaceBtn.classList.remove("button-pressed");
+  dinoRacer.classList.add("dinoRaceHidden");
   removeMatchBoard();
   title.innerHTML = "Let's count, Ellie!";
   activeMode = countingArr;
@@ -82,12 +93,29 @@ dinoMatchBtn.addEventListener("click", function () {
   abcBtn.classList.remove("button-pressed");
   nameBtn.classList.remove("button-pressed");
   oneTwoThreeBtn.classList.remove("button-pressed");
+  dinoRaceBtn.classList.remove("button-pressed");
+  dinoRacer.classList.add("dinoRaceHidden");
+  removeMatchBoard();
   title.innerHTML = "Let's match Dinosaurs, Ellie!"
   activeMode = "dinoMatch";
   letter.innerHTML = "";
   boardState = generateMatchBoardState(dinosArr);
   counter = 0;
   renderMatchBoard(boardState, letter);
+})
+
+dinoRaceBtn.addEventListener("click", () => {
+  dinoRaceBtn.classList.add("button-pressed");
+  dinoRacer.classList.remove("dinoRaceHidden");
+  countBtn.classList.remove("button-pressed");
+  abcBtn.classList.remove("button-pressed");
+  nameBtn.classList.remove("button-pressed");
+  oneTwoThreeBtn.classList.remove("button-pressed");
+  dinoMatchBtn.classList.remove("button-pressed");
+  removeMatchBoard();
+  title.innerHTML = "Ellie the Dino Racer!";
+  activeMode = "dinoRace";
+  letter.innerHTML = "";
 })
 
 pageArea.addEventListener("keydown", function (event) {
