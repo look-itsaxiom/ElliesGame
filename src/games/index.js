@@ -1,5 +1,4 @@
-import NameSpell from "./NameSpell";
+import Alphabet from "./Alphabet"
+import NameSpell from "./NameSpell"
 
-export {
-  NameSpell,
-};
+export { Alphabet, NameSpell }

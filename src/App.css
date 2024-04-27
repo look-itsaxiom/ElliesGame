@@ -1,19 +1,51 @@
 .app header {
-  text-align: center;
-  width: 100%;
-  margin: 1rem 0 1rem 0;
+    text-align: center;
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+    color: pink;
 }
 
 .contentWrapper {
-  display: flex;
+    display: flex;
 }
 
 .navBar {
-  width: 25vw;
-  height: 90vh;
+    width: 25vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navBar button {
+    height: 4rem;
+    width: 8rem;
+    margin: 2rem 0;
+    display: inline-block;
+    background: pink;
+    border: none;
+    outline: none;
+    color: black;
+    border-radius: 3px;
+}
+
+.navBar button:hover {
+    background: lightpink;
+}
+
+.navBar button:active {
+    background: palevioletred;
+}
+
+button.selected {
+    margin-left: 2rem;
 }
 
 .gameContainer {
-  width: 75vw;
-  height: 90vh;
+    width: 75vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
