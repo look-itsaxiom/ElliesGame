@@ -209,7 +209,7 @@ function renderMatchBoard(boardState, target) {
       })
       
     })
-    img.src = "img/cardback.jpg";
+    img.src = "../img/cardback.jpg";
 
     board.appendChild(img);
     
